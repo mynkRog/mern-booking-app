@@ -6,7 +6,6 @@ const UI_URL = "http://localhost:5173/";
 test.beforeEach(async ({ page }) => {
   await page.goto(UI_URL);
 
-  // get the sign in button
   await page.getByRole("link", { name: "Sign In" }).click();
 
   await expect(page.getByRole("heading", { name: "Sign In" })).toBeVisible();
@@ -63,4 +62,24 @@ test("should display hotels", async ({ page }) => {
     page.getByRole("link", { name: "View Details" }).first()
   ).toBeVisible();
   await expect(page.getByRole("link", { name: "Add Hotel" })).toBeVisible();
+});
+
+test("should edit hotel", async ({ page }) => {
+  await page.goto(`${UI_URL}my-hotels`);
+
+  await page.getByRole("link", { name: "View Details" }).first().click();
+
+  await page.waitForSelector('[name="name"]', { state: "attached" });
+  await expect(page.locator('[name="name"]')).toHaveValue("Dublin Getaways");
+  await page.locator('[name="name"]').fill("Dublin Getaways UPDATED");
+  await page.getByRole("button", { name: "Save" }).click();
+  await expect(page.getByText("Hotel Saved!")).toBeVisible();
+
+  await page.reload();
+
+  await expect(page.locator('[name="name"]')).toHaveValue(
+    "Dublin Getaways UPDATED"
+  );
+  await page.locator('[name="name"]').fill("Dublin Getaways");
+  await page.getByRole("button", { name: "Save" }).click();
 });
