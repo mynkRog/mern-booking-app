@@ -41,6 +41,7 @@ const ImagesSection = () => {
             ))}
           </div>
         )}
+
         <input
           type="file"
           multiple
@@ -50,12 +51,15 @@ const ImagesSection = () => {
             validate: (imageFiles) => {
               const totalLength =
                 imageFiles.length + (existingImageUrls?.length || 0);
+
               if (totalLength === 0) {
                 return "At least one image should be added";
               }
+
               if (totalLength > 6) {
                 return "Total number of images cannot be more than 6";
               }
+
               return true;
             },
           })}

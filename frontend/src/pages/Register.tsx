@@ -84,7 +84,7 @@ const Register = () => {
             required: "This field is required",
             minLength: {
               value: 6,
-              message: "Password must be atleast 6 characters long",
+              message: "Password must be at least 6 characters",
             },
           })}
         ></input>
@@ -98,12 +98,11 @@ const Register = () => {
           type="password"
           className="border rounded w-full py-1 px-2 font-normal"
           {...register("confirmPassword", {
-            required: "This field is required",
             validate: (val) => {
               if (!val) {
                 return "This field is required";
               } else if (watch("password") !== val) {
-                return "Your passwords dont match";
+                return "Your passwords do no match";
               }
             },
           })}

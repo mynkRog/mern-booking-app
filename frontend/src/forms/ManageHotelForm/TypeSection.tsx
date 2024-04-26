@@ -10,7 +10,7 @@ const TypeSection = () => {
   } = useFormContext<HotelFormData>();
 
   const typeWatch = watch("type");
-  
+
   return (
     <div>
       <h2 className="text-2xl font-bold mb-3">Type</h2>
@@ -26,7 +26,9 @@ const TypeSection = () => {
             <input
               type="radio"
               value={type}
-              {...register("type", { required: "This field is Required" })}
+              {...register("type", {
+                required: "This field is required",
+              })}
               className="hidden"
             />
             <span>{type}</span>

@@ -13,18 +13,18 @@ export type HotelFormData = {
   country: string;
   description: string;
   type: string;
-  adultCount: number;
-  childCount: number;
-  facilities: string[];
   pricePerNight: number;
   starRating: number;
+  facilities: string[];
   imageFiles: FileList;
   imageUrls: string[];
+  adultCount: number;
+  childCount: number;
 };
 
 type Props = {
   hotel?: HotelType;
-  onSave: (HotelFormData: FormData) => void;
+  onSave: (hotelFormData: FormData) => void;
   isLoading: boolean;
 };
 
@@ -64,6 +64,7 @@ const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
     Array.from(formDataJson.imageFiles).forEach((imageFile) => {
       formData.append(`imageFiles`, imageFile);
     });
+
     onSave(formData);
   });
 

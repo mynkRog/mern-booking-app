@@ -60,7 +60,7 @@ const SignIn = () => {
             required: "This field is required",
             minLength: {
               value: 6,
-              message: "Password must be atleast 6 characters long",
+              message: "Password must be at least 6 characters",
             },
           })}
         ></input>
@@ -72,7 +72,7 @@ const SignIn = () => {
         <span className="text-sm">
           Not Registered?{" "}
           <Link className="underline" to="/register">
-            Create an Account Here
+            Create an account here
           </Link>
         </span>
         <button

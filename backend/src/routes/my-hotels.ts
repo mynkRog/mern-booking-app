@@ -2,9 +2,9 @@ import express, { Request, Response } from "express";
 import multer from "multer";
 import cloudinary from "cloudinary";
 import Hotel from "../models/hotel";
-import { HotelType } from "../shared/types";
 import verifyToken from "../middleware/auth";
 import { body } from "express-validator";
+import { HotelType } from "../shared/types";
 
 const router = express.Router();
 
@@ -12,7 +12,7 @@ const storage = multer.memoryStorage();
 const upload = multer({
   storage: storage,
   limits: {
-    fileSize: 5 * 1024 * 1024,
+    fileSize: 5 * 1024 * 1024, // 5MB
   },
 });
 
@@ -48,9 +48,10 @@ router.post(
 
       const hotel = new Hotel(newHotel);
       await hotel.save();
+
       res.status(201).send(hotel);
     } catch (e) {
-      console.log("Error creating hotel: ", e);
+      console.log(e);
       res.status(500).json({ message: "Something went wrong" });
     }
   }
@@ -61,7 +62,7 @@ router.get("/", verifyToken, async (req: Request, res: Response) => {
     const hotels = await Hotel.find({ userId: req.userId });
     res.json(hotels);
   } catch (error) {
-    res.status(500).json({ message: "Error Fetching Hotel" });
+    res.status(500).json({ message: "Error fetching hotels" });
   }
 });
 
@@ -86,6 +87,7 @@ router.put(
     try {
       const updatedHotel: HotelType = req.body;
       updatedHotel.lastUpdated = new Date();
+
       const hotel = await Hotel.findOneAndUpdate(
         {
           _id: req.params.hotelId,
@@ -110,7 +112,7 @@ router.put(
       await hotel.save();
       res.status(201).json(hotel);
     } catch (error) {
-      res.status(500).json({ message: "something went wrong" });
+      res.status(500).json({ message: "Something went throw" });
     }
   }
 );
@@ -118,8 +120,8 @@ router.put(
 async function uploadImages(imageFiles: Express.Multer.File[]) {
   const uploadPromises = imageFiles.map(async (image) => {
     const b64 = Buffer.from(image.buffer).toString("base64");
-    let dataURL = "data:" + image.mimetype + ";base64," + b64;
-    const res = await cloudinary.v2.uploader.upload(dataURL);
+    let dataURI = "data:" + image.mimetype + ";base64," + b64;
+    const res = await cloudinary.v2.uploader.upload(dataURI);
     return res.url;
   });
 
