@@ -3,7 +3,7 @@
 
 MERN Booking App is a full-stack web application built using the MERN (MongoDB, Express.js, React.js, Node.js) stack. It allows users to browse, search, and book hotels, as well as manage their bookings. The application also features user authentication, hotel management (adding, editing, and deleting hotels), image uploading, hotel rating, and payment processing through Stripe.
 
-### 📡 Live @: https://mern-booking-app-msj6.onrender.com🔗
+### 📡 Live @: https://mern-booking-app-msj6.onrender.com 🔗
 
 
 ### 🛠️ Usage
