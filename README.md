@@ -18,6 +18,13 @@ MERN Booking App is a full-stack web application built using the MERN (MongoDB, 
 
 * Search and Sorting: Users can search for hotels by name or location and sort results based on various criteria.
 
+### 🏗️ Key Features
+* Comprehensive hotel browsing functionality, including detailed hotel information and room booking capabilities.
+  
+* Dynamic filtering options by amenities, rating, location, and price, with sorting functionality by rating and price.
+  
+* Robust hotel rating system and pagination for enhanced user experience.
+
 ### 🧪 Testing 
 
 * The MERN Booking App includes automated tests using Playwright Test in Visual Studio Code. To run the tests, follow these steps:
